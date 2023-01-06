@@ -19,21 +19,27 @@ public class MainWindow extends javax.swing.JFrame {
     }
 
     
-    public static boolean isPalindrome(String[] list) {
-        // create a queue and a stack using the list of strings
-        Queue<String> queue = new LinkedList<>(List.of(list));
-        Stack<String> stack = new Stack<>();
-        queue.forEach(stack::push);
+public boolean isPalinlist(String[] array) {
+    Queue<String> queue = new LinkedList<>();
+    Stack<String> stack = new Stack<>();
 
-        // check if the list is a palindrome
-        while (!queue.isEmpty()) {
-            if (!queue.poll().equals(stack.pop())) {
-                return false;
-            }
-        }
-
-        return true;
+    // add elements from the array to the queue and stack
+    for (String s : array) {
+        queue.add(s);
+        stack.push(s);
     }
+
+    // compare elements from the queue and the stack
+    while (!queue.isEmpty()) {
+        String q = queue.remove();
+        String s = stack.pop();
+        if (!q.equals(s)) {
+            return false;
+        }
+    }
+
+    return true;
+}
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -112,7 +118,7 @@ public class MainWindow extends javax.swing.JFrame {
     private void MainWindow_Button_CheckActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MainWindow_Button_CheckActionPerformed
         String input = MainWindow_TextField_UserInput.getText();
         String[] list = input.split(" ");
-        boolean palindrome = isPalindrome(list);
+        boolean palindrome = isPalinlist(list);
 
         if(palindrome == true){
             MainWindow_TextField_Answer.setText(Arrays.toString(list) + " is a palinlist.");
